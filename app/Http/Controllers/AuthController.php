@@ -62,4 +62,12 @@ class AuthController extends Controller
         $user->save();
         return redirect(route('bot.explore'));
     }
+
+    public function rotateToken()
+    {
+        $user = User::findOrFail(Auth::user()->id);
+        $user->token = md5(uniqid());
+        $user->save();
+        return redirect(route('api.index'))->with(['rotate' => '重置完成，你的新token是' . $user->token]);
+    }
 }

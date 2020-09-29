@@ -34,6 +34,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/bots/{id}', 'BotController@update')->name('bot.update');
     Route::delete('/bots/{id}', 'BotController@destroy')->name('bot.destroy');
     Route::get('/bots/explore', 'BotController@explore')->name('bot.explore');
+
+    Route::get('/rotate/token', 'AuthController@rotateToken')->name('rotate.token');
 });
 
 Route::any('/send', 'ApiController@send')->name('api');

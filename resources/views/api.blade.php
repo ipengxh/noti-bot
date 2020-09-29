@@ -24,8 +24,35 @@
                 </div>
             </div>
             <div class="card mt-4">
-                <div class="card-header">API</div>
+                <div class="card-header">
+                    API
+                    <a href="#" class="btn btn-sm btn-outline-danger float-right" data-toggle="modal" data-target="#rotate">重置token</a>
+                    <div class="modal fade" tabindex="-1" role="dialog" id="rotate">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">你是认真的？</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>重置token之后，你需要修改所有用到之前token的脚本、命令，这可能非常麻烦。但是如果你的token已经泄漏了的话，这个操作就非常有必要了。</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">算了，我瞎点的</button>
+                                    <a href="{{ route('rotate.token') }}" class="btn btn-danger">我是认真的</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
+                    @if (session('rotate'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('rotate') }}
+                        </div>
+                    @endif
                     <h5 style="color: red;">请不要泄露自己的token，否则其他人可以冒充你的身份发送消息</h5>
                     <h4><b># 调用API给自己发条消息</b></h4>
                     <p>你的API Token: {{ Auth::user()->token }}</p>
